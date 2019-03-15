@@ -13,15 +13,15 @@ import extern.ExternModel;
 public class MainFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private final String bg = "Background.jpg"; // 背景
-	private final Font titleFont = new Font("宋体", Font.BOLD, 20); // 标题字体
-	private final Font buttonFont = new Font("宋体", Font.PLAIN, 18); // 按钮字体
+	private final String bg = "Background.jpg"; // Background
+	private final Font titleFont = new Font("Noto Sans Mono", Font.BOLD, 20); // Title Font
+	private final Font buttonFont = new Font("Noto Sans Mono", Font.PLAIN, 18); // Button Font
 	private JButton btn_picture, btn_video, btn_exit;
 	private JFileChooser fc = new JFileChooser();
 	private String path = null;
 
 	/**
-	 * 主函数
+	 * Main Function
 	 * 
 	 * @param args
 	 */
@@ -32,11 +32,11 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	public MainFrame() {
-		super("PCN 人脸识别程序");
+		super("Face Recognition");
 		setContentPane(new BgPanel(bg));
 		setLayout(null);
 
-		// 设置文件过滤器
+		// Set File Filter
 		fc.setFileFilter(new FileFilter() {
 			public boolean accept(File file) {
 				String name = file.getName();  
@@ -48,13 +48,13 @@ public class MainFrame extends JFrame implements ActionListener {
 			}
 		});
 
-		JLabel title = new JLabel("请选择识别模式", JLabel.LEFT);
+		JLabel title = new JLabel("Select the Recognition Mode", JLabel.LEFT);
 		title.setFont(titleFont);
 		title.setForeground(Color.WHITE);
 
-		btn_picture = new CircleButton("照片识别", new Color(26, 83, 92));
-		btn_video = new CircleButton("视频识别", new Color(0, 91, 172));
-		btn_exit = new CircleButton("退出", new Color(255, 107, 107));
+		btn_picture = new CircleButton("Photo", new Color(26, 83, 92));
+		btn_video = new CircleButton("Video", new Color(0, 91, 172));
+		btn_exit = new CircleButton("Exit", new Color(255, 107, 107));
 
 		Color c_text = new Color(248, 255, 247);
 		btn_picture.setForeground(c_text);
@@ -80,14 +80,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		add(btn_exit);
 
 		setSize(560, 500);
-		setLocationRelativeTo(null);// 设置窗口到屏幕中央
+		setLocationRelativeTo(null); // Set Window to the Center of the Screen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
 	}
 
 	/**
-	 * 按钮监听器实现方法
+	 * Button Listener Implementation
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn_picture) {
@@ -95,9 +95,9 @@ public class MainFrame extends JFrame implements ActionListener {
 			do {
 				path = choose();
 				if (path != null) {
-					// 得到文件路径
+					// Get File Path
 					ExternModel.picture(path);
-					int res = JOptionPane.showConfirmDialog(null, "你要识别下一张图片吗？", "提示", JOptionPane.YES_NO_OPTION);
+					int res = JOptionPane.showConfirmDialog(null, "Do you want to recognize another picture?", "Question", JOptionPane.YES_NO_OPTION);
 					if (res == JOptionPane.YES_OPTION)
 						continue;
 					else if (res == JOptionPane.NO_OPTION)
@@ -111,38 +111,38 @@ public class MainFrame extends JFrame implements ActionListener {
 			ExternModel.video();
 			setVisible(true);
 		} else if (e.getSource() == btn_exit) {
-			// 退出系统
+			// Exit Program
 			dispose();
 			System.exit(0);
 		}
 	}
 
 	/**
-	 * 选择文件
+	 * Choose File
 	 * 
-	 * @return 文件路径；null：无选择的文件
+	 * @return File path；null：No File Selected
 	 */
 	private String choose() {
-		fc.setDialogTitle("选择文件");
+		fc.setDialogTitle("Choose File");
 		String result = null;
 		int flag;
-		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);// 只能选择文件
+		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);// Can Only Select Files
 		try {
 			flag = fc.showOpenDialog(null);
 		} catch (HeadlessException head) {
 			return null;
 		}
 		if (flag == JFileChooser.APPROVE_OPTION)
-			// 获得该文件
+			// Obtain the File
 			result = fc.getSelectedFile().getAbsolutePath();
 		return result;
 	}
 
 	/**
-	 * 设置指定字体
+	 * Set the Specified Font
 	 * 
-	 * @param font 要设置的字体
-	 * @param coms 要设置字体的容器
+	 * @param font The Font to be Set
+	 * @param coms The Container to Set the Font
 	 */
 	private void setFont(Font font, Component... coms) {
 		for (Component c : coms)
@@ -150,19 +150,16 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * 背景图片面板
-	 * 
-	 * @author 雨橙Orainge
-	 *
+	 * Background Image Panel
 	 */
 	private final class BgPanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 		private Image img;
 
 		/**
-		 * 创建一个指定图片为背景的 Panel
+		 * Create a Panel With the Specified Image As the Background
 		 * 
-		 * @param src 图片路径
+		 * @param src Image Path
 		 */
 		public BgPanel(String src) {
 			setLayout(new BorderLayout());
@@ -172,38 +169,35 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			// 下面是为了背景图片可以跟随窗口自行调整大小，可以自己设置成固定大小
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		}
 	}
 
 	/**
-	 * 圆形按钮
-	 * 
-	 * @author 雨橙Orainge
+	 * Circle Button
 	 */
 	public class CircleButton extends JButton {
 		private static final long serialVersionUID = 1L;
-		private Color bgColor; // 背景颜色
-		private Color highColor = new Color(224, 158, 12); // 点击时高亮颜色
+		private Color bgColor; // Background Color
+		private Color highColor = new Color(224, 158, 12); // Highlight Color When Clicked
 
 		public CircleButton(String label, Color bgColor) {
 			super(label);
 			this.bgColor = bgColor;
 
-			// 获取按钮的最佳大小
+			// Get the Best Size of the Button
 			Dimension size = getPreferredSize();
 			size.width = size.height = 20;
 			setPreferredSize(size);
 
 			setContentAreaFilled(false);
-			this.setBorderPainted(false); // 不绘制边框
-			this.setFocusPainted(false); // 不绘制焦点状态
+			this.setBorderPainted(false);
+			this.setFocusPainted(false);
 		}
 
 		protected void paintComponent(Graphics g) {
 			if (getModel().isArmed()) {
-				g.setColor(highColor); // 点击时高亮
+				g.setColor(highColor);
 			} else {
 				g.setColor(bgColor);
 			}
@@ -213,7 +207,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		protected void paintBorder(Graphics g) {
 			if (getModel().isArmed()) {
-				g.setColor(highColor); // 点击时高亮
+				g.setColor(highColor);
 			} else {
 				g.setColor(bgColor);
 			}
@@ -224,10 +218,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		public boolean contains(int x, int y) {
 			if ((shape == null) || (!shape.getBounds().equals(getBounds()))) {
-				// 构造一个椭圆形对象
+				// Construct an Elliptical Object
 				shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
 			}
-			// 判断鼠标的x、y坐标是否落在按钮形状内。
 			return shape.contains(x, y);
 		}
 	}

@@ -20,15 +20,15 @@ JNIEXPORT void JNICALL Java_extern_ExternModel_picture (JNIEnv *env, jclass c, j
     tm.start();
     std::vector<Window> faces = detector.DetectFace(img);
     tm.stop();
-    std::cout << "图片路径: " << str << std::endl;
-    std::cout << "识别消耗时间: "<< tm.getTimeMilli() << " ms" << std::endl;
+    std::cout << "Image Path: " << str << std::endl;
+    std::cout << "Time Cost: "<< tm.getTimeMilli() << " ms" << std::endl;
     cv::Mat faceImg;
     for (int j = 0; j < faces.size(); j++)
     {
         cv::Mat tmpFaceImg = CropFace(img, faces[j], 200);
         faceImg = MergeImgs(faceImg, tmpFaceImg);
     }
-    cv::imshow("识别结果", faceImg);
+    cv::imshow("Recognition Result", faceImg);
     for (int j = 0; j < faces.size(); j++)
     {
         DrawFace(img, faces[j]);
@@ -42,7 +42,7 @@ JNIEXPORT void JNICALL Java_extern_ExternModel_picture (JNIEnv *env, jclass c, j
     else
 	cv::putText(img, ss.str() + " face", cv::Point(20, 45), 4, 1, cv::Scalar(0, 0, 125));
 
-    cv::imshow("PCN 照片识别 (按任意键退出)", img);
+    cv::imshow("Photo Recognition (Press any key to exit)", img);
     cv::waitKey();
 
     env->ReleaseStringUTFChars(path, str);
@@ -78,7 +78,7 @@ JNIEXPORT void JNICALL Java_extern_ExternModel_video (JNIEnv *env, jclass c)
         for (int i = 0; i < faces.size(); i++)
             DrawFace(img, faces[i]);
 
-        cv::imshow("PCN 视频识别 (按 Q 键退出)", img);
+        cv::imshow("Video Recognition (Press Q to exit)", img);
         if (cv::waitKey(1) == 'q')
             break;
     }

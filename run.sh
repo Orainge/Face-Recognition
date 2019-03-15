@@ -1,7 +1,7 @@
 #!/usr/bin/en sh
-echo "----------PCN 人脸识别程序----------"
+echo "----------Face Recognition----------"
 echo ""
-read -p "请输入 caffe 安装路径，回车使用默认值(\$CAFFEROOT):" path
+read -p "Please enter the Caffe installation path, press Enter to use the default value(\$CAFFEROOT):" path
 
 if [ "$path" != "" ];
 then
@@ -12,25 +12,25 @@ export LD_LIBRARY_PATH=$CAFFEROOT/build/lib/:./extern:$LD_LIBRARY_PATH
 echo ""
 
 if [ ! -f "./extern/libPCN.so" ]; then
-   echo "------------编译必须文件------------"
-   echo "开始编译..."
+   echo "------------Compile the Necessary Files------------"
+   echo "Start compiling..."
 
-   # 编译 java 文件
-   echo ">>>编译 java 文件..."
+   # Compile java file
+   echo ">>>Compiling java file..."
    javac pcn/MainFrame.java extern/ExternModel.java
 
-   # 编译 PCN 库文件
-   echo ">>>编译 PCN 库文件..."
+   # Compile the PCN library file
+   echo ">>>Compiling the PCN library file..."
    g++ -fpic -shared -o ./extern/libPCN.so ./extern/compile/PCN.cpp -O3 -D CPU_ONLY -I $CAFFEROOT/include/ -I $CAFFEROOT/.build_release/src/ -L $CAFFEROOT/build/lib/ -lcaffe -lglog -lboost_system -lprotobuf `pkg-config --cflags --libs opencv`
 
-   # 编译人脸识别插件模块
-   echo ">>>编译人脸识别插件模块..."
+   # Compile face recognition plugin module
+   echo ">>>Compiling face recognition plugin module..."
    g++ -fPIC -I $JAVA_HOME/include -I $JAVA_HOME/include/linux -shared -o ./extern/libExternModel.so ./extern/compile/ExternModel.cpp ./extern/compile/PCN.h ./extern/libPCN.so -std=c++11 -O3 -D CPU_ONLY -I $CAFFEROOT/include/ -I $CAFFEROOT/.build_release/src/ -L $CAFFEROOT/build/lib/ -lcaffe -lglog -lboost_system -lprotobuf `pkg-config --cflags --libs opencv`
 
-   echo "编译完成!"
+   echo "Finish!"
    echo ""
 fi
 
-echo ">>>开始运行"
+echo ">>>Start program"
 java pcn.MainFrame
-echo ">>>结束运行"
+echo ">>>Exit"
