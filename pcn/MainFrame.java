@@ -68,7 +68,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 		int b_w = 120;
 		int b_h = 120;
-		title.setBounds(30, 10, 150, 40);
+		title.setBounds(30, 10, 340, 40);
 		btn_picture.setBounds(title.getX() + 10, title.getY() + title.getHeight() + 20, b_w, b_h);
 		btn_video.setBounds(btn_picture.getX() + (b_w / 2) + (b_w / 4) + 20,
 				btn_picture.getY() + btn_picture.getHeight() + 8, b_w, b_h);
