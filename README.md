@@ -3,6 +3,7 @@ A Small Program for Face Recognition Based on PCN
 
 ## Prerequisites
 * Linux
+* [JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Caffe](https://github.com/BVLC/caffe)
 
 ## Reference
