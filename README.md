@@ -1,5 +1,5 @@
 # Face Recognition
-A Small Program for Face Recognition Based on PCN.
+A Small Program for Face Recognition Based on PCN
 
 ## Prerequisites
 * Linux
@@ -22,8 +22,8 @@ $CAFFEROOT
 3. Enjoy!
 
 ## Screenshot
-<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot1.jpg" width=700 alt="Program main interface">
-<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot2.jpg" width=700 alt="Function Interface">
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot1.jpg" width=700 alt="Program Main Interface">
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot2.jpg" width=700 alt="Module Interface">
 
 ## License
 
