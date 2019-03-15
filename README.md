@@ -1,12 +1,12 @@
-# Face-Recognition
-A Small Program for Face Recognition Based on PCN
+# Face Recognition
+A Small Program for Face Recognition Based on PCN.
 
 ## Prerequisites
 * Linux
 * [Caffe](https://github.com/BVLC/caffe)
 
 ## Reference
-* [PCN-FaceDetection](https://github.com/Jack-CV/PCN-FaceDetection/)
+* [FaceKit](https://github.com/Jack-CV/FaceKit)
 
 ## Instruction
 1. Use the terminal to enter the program root directory, and then enter the following command to execute (the first run will compile the necessary files):
@@ -22,8 +22,9 @@ $CAFFEROOT
 3. Enjoy!
 
 ## Screenshot
-<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot1.jpg" width=640 alt="Program main interface">
-<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot2.jpg" width=640 alt="Function Interface">
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot1.jpg" width=700 alt="Program main interface">
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot2.jpg" width=700 alt="Function Interface">
 
 ## License
+
 This code is distributed under the [BSD 2-Clause license](LICENSE).

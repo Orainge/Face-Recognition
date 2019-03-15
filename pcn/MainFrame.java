@@ -14,11 +14,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private final String bg = "Background.jpg"; // Background
-	private final Font titleFont = new Font("Noto Sans Mono", Font.BOLD, 20); // Title Font
+	private final Font titleFont = new Font("Noto Sans Mono", Font.BOLD, 19); // Title Font
 	private final Font buttonFont = new Font("Noto Sans Mono", Font.PLAIN, 18); // Button Font
 	private JButton btn_picture, btn_video, btn_exit;
 	private JFileChooser fc = new JFileChooser();
 	private String path = null;
+	private int frame_w = 560, frame_h = 500;
 
 	/**
 	 * Main Function
@@ -39,18 +40,22 @@ public class MainFrame extends JFrame implements ActionListener {
 		// Set File Filter
 		fc.setFileFilter(new FileFilter() {
 			public boolean accept(File file) {
-				String name = file.getName();  
-		        return file.isDirectory() || name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png");
+				String name = file.getName();
+				return file.isDirectory() || name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png");
 			}
 
 			public String getDescription() {
 				return "*.jpg;*.png";
 			}
 		});
-
-		JLabel title = new JLabel("Select the Recognition Mode", JLabel.LEFT);
+		
+		JLabel title = new JLabel(">>>Face Recognition<<<", JLabel.CENTER);
 		title.setFont(titleFont);
 		title.setForeground(Color.WHITE);
+
+		JLabel subtitle = new JLabel("Please Select the Recognized Mode", JLabel.CENTER);
+		subtitle.setFont(titleFont);
+		subtitle.setForeground(Color.WHITE);
 
 		btn_picture = new CircleButton("Photo", new Color(26, 83, 92));
 		btn_video = new CircleButton("Video", new Color(0, 91, 172));
@@ -66,20 +71,23 @@ public class MainFrame extends JFrame implements ActionListener {
 		btn_exit.addActionListener(this);
 		setFont(buttonFont, btn_picture, btn_video, btn_exit);
 
-		int b_w = 120;
-		int b_h = 120;
-		title.setBounds(30, 10, 340, 40);
-		btn_picture.setBounds(title.getX() + 10, title.getY() + title.getHeight() + 20, b_w, b_h);
-		btn_video.setBounds(btn_picture.getX() + (b_w / 2) + (b_w / 4) + 20,
-				btn_picture.getY() + btn_picture.getHeight() + 8, b_w, b_h);
-		btn_exit.setBounds(btn_picture.getX(), btn_video.getY() + btn_video.getHeight() + 10, b_w, b_h);
+		int b_w = 100;
+		int b_h = 100;
+		int b_interval = 60;
+		int b_y = frame_h - b_interval - b_w;
+		title.setBounds((frame_w - 260) / 2, 10, 260, 40);
+		subtitle.setBounds((frame_w - 400) / 2, 50, 400, 40);
+		btn_picture.setBounds(b_interval, b_y, b_w, b_h);
+		btn_video.setBounds(b_interval * 2 + b_w, b_y, b_w, b_h);
+		btn_exit.setBounds(b_interval * 3 + b_w * 2, b_y, b_w, b_h);
 
 		add(title);
+		add(subtitle);
 		add(btn_video);
 		add(btn_picture);
 		add(btn_exit);
 
-		setSize(560, 500);
+		setSize(frame_w, frame_h);
 		setLocationRelativeTo(null); // Set Window to the Center of the Screen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -97,7 +105,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				if (path != null) {
 					// Get File Path
 					ExternModel.picture(path);
-					int res = JOptionPane.showConfirmDialog(null, "Do you want to recognize another picture?", "Question", JOptionPane.YES_NO_OPTION);
+					int res = JOptionPane.showConfirmDialog(null, "Do you want to recognize another image?", "Question", JOptionPane.YES_NO_OPTION);
 					if (res == JOptionPane.YES_OPTION)
 						continue;
 					else if (res == JOptionPane.NO_OPTION)
