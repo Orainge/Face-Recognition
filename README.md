@@ -21,5 +21,9 @@ $CAFFEROOT
 
 3. Enjoy!
 
+## Screenshot
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot1.jpg" width=640 alt="Program main interface">
+<img src="https://raw.githubusercontent.com/Orainge/Face-Recognition/master/screenshot/screenshot2.jpg" width=640 alt="Function Interface">
+
 ## License
 This code is distributed under the [BSD 2-Clause license](LICENSE).
